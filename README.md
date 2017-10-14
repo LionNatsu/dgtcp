@@ -1,11 +1,16 @@
 # DGTCP
 
-## Datagram Transmission Control Protocol
+## Overview
 
-DGTCP is an TCP-based datagram-style protocol. It provide
+**Datagram Transmission Control Protocol** (DGTCP) is an TCP-based datagram-style protocol. It provide
 a datagram model over TCP (which is stream model).
 
+DGTCP can handle packets not larger than 65536 bytes.
+
 ## Protocol Details
+
+For sending a packet, DGTCP sends two bytes firstly, to show the length of the following data, in *network order* i.e. big-endian byte order.
+
 Here is an example of 2 packets sent in DGTCP.
 
 	[ packet #1: 00 01 02 ...(0x1FF bytes) ]
@@ -17,6 +22,7 @@ in the underlying TCP stream.
 
 	<len> <          data         >   <len> < data >   ...
 	01 FF 00 01 02 ...(0x1FF bytes)   00 03 23 12 AB   ...
+
 
 ## Golang Package
 
