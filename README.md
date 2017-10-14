@@ -20,16 +20,20 @@ in the underlying TCP stream.
 
 ## Golang Package
 
+[![GoDoc](https://godoc.org/github.com/LionNatsu/dgtcp?status.svg)](https://godoc.org/github.com/LionNatsu/dgtcp)
+
 Package dgtcp overrides Read() and Write() methods of `net.TCPConn`.
 ### Usage & Example
 
 Client:
 
 ```go
+package main
+
 import (
 	"net"
 
-	"dgtcp"
+	"github.com/LionNatsu/dgtcp"
 )
 
 func main() {
@@ -44,11 +48,13 @@ func main() {
 Server:
 
 ```go
+package main
+
 import (
 	"fmt"
 	"net"
 
-	"dgtcp"
+	"github.com/LionNatsu/dgtcp"
 )
 
 func main() {
