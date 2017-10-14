@@ -1,6 +1,6 @@
 // Package dgtcp provides a simple implementation of
 // TCP-based datagram-style protocol.
-// It overrides Read() and Write(). It can send and recieve not larger
+// It overrides Read() and Write(). It can send and receive not larger
 // than 65536 bytes per packet.
 //
 // Read() and Write() are coroutine-safe.
@@ -25,9 +25,9 @@ type DGTCPConn struct {
 	wl, rl  sync.Locker
 }
 
-// If your buffer is not big enough to recieve(read), or your buffer is too
-// big to send(write), ErrOverflow will be returned.
-var ErrOverflow = errors.New("packet is too large to recieve or send")
+// ErrOverflow will be reported if your buffer is not big enough to receive(read),
+// or your buffer is too big to send(write).
+var ErrOverflow = errors.New("packet is too large to receive or send")
 
 func (c *DGTCPConn) fillBuf(buf []byte) error {
 	var pos int
@@ -41,7 +41,7 @@ func (c *DGTCPConn) fillBuf(buf []byte) error {
 	return nil
 }
 
-// Read recieves one packet and put it into buf.
+// Read receives one packet and put it into buf.
 func (c *DGTCPConn) Read(buf []byte) (int, error) {
 	c.rl.Lock()
 	defer c.rl.Unlock()
